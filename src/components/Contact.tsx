@@ -16,7 +16,7 @@ const Contact = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-16">
           <div className="text-center">
             <div className="bg-stone-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <Phone className="h-8 w-8 text-stone-600" />
