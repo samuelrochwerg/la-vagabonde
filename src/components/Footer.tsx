@@ -59,6 +59,7 @@ const Footer = () => {
                 to="/mentions-legales" 
                 className="text-stone-400 hover:text-red-400 text-sm transition-colors"
                 style={{ '--hover-color': '#FCA5A5' } as React.CSSProperties}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Mentions légales
               </Link>
@@ -66,6 +67,7 @@ const Footer = () => {
                 to="/politique-confidentialite" 
                 className="text-stone-400 hover:text-red-400 text-sm transition-colors"
                 style={{ '--hover-color': '#FCA5A5' } as React.CSSProperties}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Politique de confidentialité
               </Link>

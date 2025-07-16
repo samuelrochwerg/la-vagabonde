@@ -60,15 +60,15 @@ const Accueil = () => {
     },
     {
       name: "Yann",
-      comment: "Nous sommes venus à 2 couples pour les Rencontres de la Photo, et avons passé un excellent séjour chez Marie-Annick. L'accueil, les chambres, le petit-déjeuner, l'emplacement : tout était parfait. Nous recommandons chaudement."
+      comment: "Nous recommandons chaudement. Nous sommes venus à 2 couples pour les Rencontres de la Photo, et avons passé un excellent séjour chez Marie-Annick. L'accueil, les chambres, le petit-déjeuner, l'emplacement : tout était parfait."
     },
     {
       name: "Gabriel",
-      comment: "Un voyage dans le temps agrémenté d'un petit déjeuner exceptionnel accompagné de musiques merveilleuses. Accueil d'une extrême gentillesse. À quelques pas des lieux touristiques arlésiens. Vous pouvez y séjourner en toute confiance."
+      comment: "Accueil d'une extrême gentillesse. Un voyage dans le temps agrémenté d'un petit déjeuner exceptionnel accompagné de musiques merveilleuses. À quelques pas des lieux touristiques arlésiens. Vous pouvez y séjourner en toute confiance."
     },
     {
       name: "Flo",
-      comment: "Très bon accueil, chambre spacieuse, très joliment décorée et qui garde la fraicheur en cette période de l'année (début Aout). Rue calme et petit déjeuner excellent dans un charmant jardin ! Idéal pour une escapade à 2."
+      comment: "Idéal pour une escapade à 2. Très bon accueil, chambre spacieuse, très joliment décorée et qui garde la fraicheur en cette période de l'année (début Aout). Rue calme et petit déjeuner excellent dans un charmant jardin !"
     },
     {
       name: "Minotandco",
@@ -76,7 +76,7 @@ const Accueil = () => {
     },
     {
       name: "Eric",
-      comment: "Une chambre d'hôte qui vous transporte au début du siècle précédent avec une propriétaire qui vous accueille sans manière mais de façon très généreuse, discrète mais pourvoyeuse de bons conseils, et qui connait très bien sa ville."
+      comment: "Une chambre d'hôte qui vous transporte au début du siècle précédent. Une propriétaire qui vous accueille sans manière mais de façon très généreuse, discrète mais pourvoyeuse de bons conseils, et qui connait très bien sa ville."
     }
   ];
 
@@ -209,6 +209,134 @@ ${formData.name}
         </div>
       </section>
 
+      {/* Customer Reviews */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-serif mb-4" style={{ color: '#B91C1C' }}>
+              Avis de nos hôtes
+            </h2>
+            <p className="text-stone-600">
+              Découvrez les témoignages de ceux qui ont séjourné à La Vagabonde
+            </p>
+          </div>
+          
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {reviews.slice(currentReviewIndex, currentReviewIndex + 3).map((review, index) => (
+                <div key={currentReviewIndex + index} className="bg-stone-50 p-6 rounded-sm shadow-sm relative">
+                  <Quote className="h-8 w-8 text-stone-300 absolute top-4 right-4" />
+                  <div className="flex items-center mb-4">
+                    <div className="flex space-x-1 mr-3">
+                      {renderStars(5)}
+                    </div>
+                  </div>
+                  <p className="text-stone-700 mb-4 italic">
+                    {(() => {
+                      const [first, ...rest] = review.comment.split(/([.!?]\s)/);
+                      return (
+                        <>
+                          <span style={{ color: '#B91C1C', fontWeight: 'bold' }}>{first}{rest[0] || ''}</span>{rest.slice(1).join('')}
+                        </>
+                      );
+                    })()}
+                  </p>
+                  <p className="text-stone-800 font-medium">
+                    {review.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+            
+            {/* Navigation buttons */}
+            {reviews.length > 3 && (
+              <>
+                <button
+                  onClick={prevReviews}
+                  disabled={currentReviewIndex === 0}
+                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 p-2 rounded-full shadow-md transition-all ${
+                    currentReviewIndex === 0 
+                      ? 'bg-stone-200 text-stone-400 cursor-not-allowed' 
+                      : 'bg-white hover:bg-stone-50 text-stone-700'
+                  }`}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                
+                <button
+                  onClick={nextReviews}
+                  disabled={currentReviewIndex >= reviews.length - 3}
+                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 p-2 rounded-full shadow-md transition-all ${
+                    currentReviewIndex >= reviews.length - 3 
+                      ? 'bg-stone-200 text-stone-400 cursor-not-allowed' 
+                      : 'bg-white hover:bg-stone-50 text-stone-700'
+                  }`}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+            
+            {/* Dots indicator */}
+            {reviews.length > 3 && (
+              <div className="flex justify-center mt-8 space-x-2">
+                {Array.from({ length: Math.ceil(reviews.length / 3) }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentReviewIndex(index * 3)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      Math.floor(currentReviewIndex / 3) === index ? 'bg-stone-700' : 'bg-stone-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* External Review Links */}
+      <section className="py-8 bg-stone-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-12">
+              <a
+                href="https://www.tripadvisor.fr/Hotel_Review-g187211-d3348999-Reviews-La_Vagabonde-Arles_Bouches_du_Rhone_Provence_Alpes_Cote_d_Azur.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center space-y-2 text-stone-700 hover:text-red-700 transition-colors"
+              >
+                <div className="flex space-x-1">
+                  {renderStars(5)}
+                </div>
+                <div className="text-center">
+                  <p className="text-sm text-stone-600 mb-1">4,7/5 • 41 avis</p>
+                </div>
+                <span className="font-medium underline decoration-2 underline-offset-4" style={{ textDecorationColor: '#B91C1C' }}>
+                  Découvrez nos avis sur Tripadvisor
+                </span>
+              </a>
+              <a
+                href="https://www.booking.com/reviews/fr/hotel/la-vagabonde.fr.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center space-y-2 text-stone-700 hover:text-red-700 transition-colors"
+              >
+                <div className="flex space-x-1">
+                  {renderStars(5)}
+                </div>
+                <div className="text-center">
+                  <p className="text-sm text-stone-600 mb-1">9,6/10 • 27 avis</p>
+                </div>
+                <span className="font-medium underline decoration-2 underline-offset-4" style={{ textDecorationColor: '#B91C1C' }}>
+                  Découvrez nos avis sur Booking
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Quick Presentation */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -327,128 +455,6 @@ ${formData.name}
           </div>
         </div>
       </section>
-
-      {/* Customer Reviews */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif mb-4" style={{ color: '#B91C1C' }}>
-              Avis de nos hôtes
-            </h2>
-            <p className="text-stone-600">
-              Découvrez les témoignages de ceux qui ont séjourné à La Vagabonde
-            </p>
-          </div>
-          
-          <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {reviews.slice(currentReviewIndex, currentReviewIndex + 3).map((review, index) => (
-                <div key={currentReviewIndex + index} className="bg-stone-50 p-6 rounded-sm shadow-sm relative">
-                  <Quote className="h-8 w-8 text-stone-300 absolute top-4 right-4" />
-                  <div className="flex items-center mb-4">
-                    <div className="flex space-x-1 mr-3">
-                      {renderStars(5)}
-                    </div>
-                  </div>
-                  <p className="text-stone-700 mb-4 italic">
-                    "{review.comment}"
-                  </p>
-                  <p className="text-stone-800 font-medium">
-                    {review.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-            
-            {/* Navigation buttons */}
-            {reviews.length > 3 && (
-              <>
-                <button
-                  onClick={prevReviews}
-                  disabled={currentReviewIndex === 0}
-                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 p-2 rounded-full shadow-md transition-all ${
-                    currentReviewIndex === 0 
-                      ? 'bg-stone-200 text-stone-400 cursor-not-allowed' 
-                      : 'bg-white hover:bg-stone-50 text-stone-700'
-                  }`}
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
-                
-                <button
-                  onClick={nextReviews}
-                  disabled={currentReviewIndex >= reviews.length - 3}
-                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 p-2 rounded-full shadow-md transition-all ${
-                    currentReviewIndex >= reviews.length - 3 
-                      ? 'bg-stone-200 text-stone-400 cursor-not-allowed' 
-                      : 'bg-white hover:bg-stone-50 text-stone-700'
-                  }`}
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              </>
-            )}
-            
-            {/* Dots indicator */}
-            {reviews.length > 3 && (
-              <div className="flex justify-center mt-8 space-x-2">
-                {Array.from({ length: Math.ceil(reviews.length / 3) }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentReviewIndex(index * 3)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      Math.floor(currentReviewIndex / 3) === index ? 'bg-stone-700' : 'bg-stone-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* External Review Links */}
-      <section className="py-8 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-12">
-              <a
-                href="https://www.tripadvisor.fr/Hotel_Review-g187211-d3348999-Reviews-La_Vagabonde-Arles_Bouches_du_Rhone_Provence_Alpes_Cote_d_Azur.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center space-y-2 text-stone-700 hover:text-red-700 transition-colors"
-              >
-                <div className="flex space-x-1">
-                  {renderStars(5)}
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-stone-600 mb-1">4,7/5 • 41 avis</p>
-                </div>
-                <span className="font-medium underline decoration-2 underline-offset-4" style={{ textDecorationColor: '#B91C1C' }}>
-                  Découvrez nos avis sur Tripadvisor
-                </span>
-              </a>
-              <a
-                href="https://www.booking.com/reviews/fr/hotel/la-vagabonde.fr.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center space-y-2 text-stone-700 hover:text-red-700 transition-colors"
-              >
-                <div className="flex space-x-1">
-                  {renderStars(5)}
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-stone-600 mb-1">9,6/10 • 27 avis</p>
-                </div>
-                <span className="font-medium underline decoration-2 underline-offset-4" style={{ textDecorationColor: '#B91C1C' }}>
-                  Découvrez nos avis sur Booking
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
 
       {/* Reservation Form */}
       <section id="reservation-form" className="py-16 bg-stone-50">

@@ -11,29 +11,27 @@ const InfosPratiques = () => {
             <h2 className="text-3xl font-serif mb-6" style={{ color: '#B91C1C' }}>
               Comment venir à La Vagabonde ?
             </h2>
-            <div className="bg-stone-50 p-6 rounded-sm shadow-sm max-w-md mx-auto mb-8">
-              <h3 className="text-lg font-medium text-stone-800 mb-2">Adresse</h3>
-              <p className="text-stone-700">
-                La Vagabonde<br />
-                8 Rue Laurent Bonnement<br />
-                13200 Arles
-              </p>
-            </div>
-          </div>
-          
-          {/* Google Maps Location */}
-          <div className="mb-12">
-            <div className="h-96 lg:h-[400px] bg-stone-200 rounded-sm shadow-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.8!2d4.6276!3d43.6761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6f50c7c8b8b8b%3A0x8b8b8b8b8b8b8b8b!2s8%20Rue%20Laurent%20Bonnement%2C%2013200%20Arles%2C%20France!5e0!3m2!1sen!2sfr!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Localisation de La Vagabonde à Arles"
-              ></iframe>
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-12">
+              <div className="bg-stone-50 p-6 rounded-sm shadow-sm max-w-md w-full">
+                <h3 className="text-lg font-medium text-stone-800 mb-2">Adresse</h3>
+                <p className="text-stone-700">
+                  La Vagabonde<br />
+                  8 Rue Laurent Bonnement<br />
+                  13200 Arles
+                </p>
+              </div>
+              <div className="bg-stone-200 rounded-sm shadow-lg overflow-hidden flex-shrink-0" style={{ width: '350px', height: '250px' }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2890.8!2d4.6276!3d43.6761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6f50c7c8b8b8b%3A0x8b8b8b8b8b8b8b8b!2s8%20Rue%20Laurent%20Bonnement%2C%2013200%20Arles%2C%20France!5e0!3m2!1sen!2sfr!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localisation de La Vagabonde à Arles"
+                ></iframe>
+              </div>
             </div>
           </div>
           
